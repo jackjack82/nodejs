@@ -9,7 +9,7 @@ if (!address) {
     geocode(address, (error, { latitude, longitude, location }) => {
         if (error) {
             return console.log(error)
-        }
+        }   
 
         forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
