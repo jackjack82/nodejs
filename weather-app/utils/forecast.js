@@ -3,6 +3,11 @@ const request = require('request')
 const forecast = (latitude, longitude, callback) => {
     const url = 'https://api.darksky.net/forecast/9d1465c6f3bb7a6c71944bdd8548d026/' + latitude + ',' + longitude
 
+    // the old versione before "Object Property Shorthand" would be...
+    // request({ url, json: true }, (error, response) => {
+    // } else if (response.body.error) {...
+    // >>> see data shorthand examples. >>> {body} is already a key/value of response!!!
+
     request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to weather service!', undefined)
