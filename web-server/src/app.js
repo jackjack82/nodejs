@@ -4,6 +4,8 @@ const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
+// console.log(__dirname) >> try print this
+
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -20,7 +22,10 @@ hbs.registerPartials(partialsPath)
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
-app.get('', (req, res) => {
+app.get('', (req, res) => { // '' is the website route, from { is called the "handler" 
+    // 1) res.send('Hello express!) >> basic feedback to url 
+    // 2) res.send('<h1>Hello express!</h1>)
+    // 3) res.send({name: Giac, age: 37}) >> this case I return a JSON
     res.render('index', {
         title: 'Weather',
         name: 'Andrew Mead'
@@ -97,6 +102,7 @@ app.get('*', (req, res) => {
     })
 })
 
+// listen is for running the server
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
