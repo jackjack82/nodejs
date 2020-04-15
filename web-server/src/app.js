@@ -6,7 +6,7 @@ const forecast = require('./utils/forecast')
 
 // console.log(__dirname) >> try print this
 
-const app = express()
+const app = express() // check http://expressjs.com/en/5x/api.html#app for details
 const port = process.env.PORT || 3000
 
 // Define paths for Express config
@@ -15,7 +15,7 @@ const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
 // Setup handlebars engine and views location
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs')       // http://expressjs.com/en/5x/api.html#app.set check all build-in methods
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
