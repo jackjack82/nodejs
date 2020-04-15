@@ -73,9 +73,12 @@ app.get('/weather', (req, res) => {
     })
 })
 
+// Query String
+// localhost:3000/products?search=games >>> parameter is passed in the URL
+// you can have single response, else you get "Cannot set headers after they are sent to the client"
 app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        return res.send({
+    if (!req.query.search) { 
+        return res.send({   // you can have single response, that is why I make RETURN, else he also excutes the next res.send(...)
             error: 'You must provide a search term'
         })
     }
@@ -94,6 +97,7 @@ app.get('/help/*', (req, res) => {
     })
 })
 
+// this must be LAST. it takes all the requests that have not been handled before!!
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
