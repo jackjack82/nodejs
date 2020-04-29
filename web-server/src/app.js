@@ -47,6 +47,8 @@ app.get('/help', (req, res) => {
     })
 })
 
+// JSON HTTP Endpoint, a simple way to define the base URL and
+// authentication credentials to use when making HTTP requests
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
