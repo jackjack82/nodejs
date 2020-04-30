@@ -45,6 +45,12 @@ MongoClient.connect(connectionUrl, { userNewUrlparser: true }, (error,client) =>
         >> FIND has NO CALLBACK, he returns a CURSORS so check docs for it, or
         use the cursor.toArray((error, users)) => {}
 
+        >> UPDATE docs at this link
+        http://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#updateOne
+
+        >> DELETE http://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#deleteOne
+        
+
         */
 
     })
