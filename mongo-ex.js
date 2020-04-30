@@ -35,5 +35,17 @@ MongoClient.connect(connectionUrl, { userNewUrlparser: true }, (error,client) =>
         }
 
         return console.log(result.ops)
+
+
+        /* other CRUD 
+        http://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+        search for an ID in the way below 
+        db.collection('users').findOne({ _id: new ObjectID("<ID in string format>")})
+
+        >> FIND has NO CALLBACK, he returns a CURSORS so check docs for it, or
+        use the cursor.toArray((error, users)) => {}
+
+        */
+
     })
 })
