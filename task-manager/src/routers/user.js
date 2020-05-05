@@ -6,6 +6,7 @@ const auth = require('../middleware/auth')
 const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account')
 const router = new express.Router()
 
+// creating a new user
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
 
@@ -19,13 +20,42 @@ router.post('/users', async (req, res) => {
     }
 })
 
+/*  Querying data: https://mongoosejs.com/docs/queries.html
+
+// generic query with no params
+router.get('/users', (req, res) => {
+    User.find({}).then((users) => {
+        res.send(users)
+    }).catch((e) => {
+
+    })
+})
+
+// getting specific ID
+router.get('/users:id', (req, res) => {
+    console.log(req.params)     // see the params management
+    const _id = req.parms.id
+    const user = User.findById(_id).then((user) => {
+        if(!user) {             // JS return no error if missing
+            return res.status(404).send())
+        }
+        res.send(user)      // mongoose automatically converts ObjectID to string
+    }).catch((e) => {
+
+    })
+
+})
+
+*/
+
+
 router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
-        res.status(400).send()
+        res.status(400).send()  // https://httpstatuses.com/
     }
 })
 

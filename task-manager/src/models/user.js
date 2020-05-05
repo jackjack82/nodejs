@@ -1,8 +1,8 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require('mongoose')    // we do not get anything, just make sure it executes and it connects
+const validator = require('validator')  // npm module for data validation
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./task')
+const Task = require('./task')          // the file ends with module.exports = <className>
 
 const userSchema = new mongoose.Schema({
     name: {
