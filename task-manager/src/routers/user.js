@@ -86,8 +86,10 @@ router.get('/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
 
+// remember to use 'patch' also in postman.com
 router.patch('/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
+    // if we update not existing fields, we get NO error!
     const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
@@ -136,6 +138,9 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
     res.status(400).send({ error: error.message })
 })
 
+// auth as 3rd param is the MIDDLEWARE function to RUN, then it 
+// will run the handler ONLY if he middleware calls the NEXT function!!
+// else it stays still, like 400 error!
 router.delete('/users/me/avatar', auth, async (req, res) => {
     req.user.avatar = undefined
     await req.user.save()

@@ -34,15 +34,21 @@ router.get('/tasks', auth, async (req, res) => {
     }
 
     try {
+        /* base solution would be:
+        const tasks = await Task.find({owner: req.user._id})
+        res.send(tasks)
+
+        GET /tasks?limit=10&skip=10
+         */
         await req.user.populate({
             path: 'tasks',
             match,
-            options: {
+            options: {      // for pagination and sorting
                 limit: parseInt(req.query.limit),
                 skip: parseInt(req.query.skip),
                 sort
             }
-        }).execPopulate()
+        }).execPopulate() // converts the ID association to the entire document
         res.send(req.user.tasks)
     } catch (e) {
         res.status(500).send()

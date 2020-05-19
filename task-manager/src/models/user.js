@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    tokens: [{
+    tokens: [{      //note, this is an array of tokens!
         token: {
             type: String,
             required: true
@@ -74,6 +74,8 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
+    // decoding can of intermediate token structure can be done here https://www.base64decode.org/
+    // also expiry date shall be included
     const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
     user.tokens = user.tokens.concat({ token })
@@ -110,7 +112,7 @@ userSchema.pre('save', async function (next) {
 })
 
 // Delete user tasks when user is removed
-userSchema.pre('remove', async function (next) {
+userSchema.pre('remove', async function (next) {  // 
     const user = this
     await Task.deleteMany({ owner: user._id })
     next()
